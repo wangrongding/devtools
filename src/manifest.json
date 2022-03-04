@@ -1,38 +1,40 @@
 {
+  "manifest_version": 3,
   "name": "translator",
-  "version": "0.0.1",
-  "description": "translator",
-  "permissions": [
-    "activeTab",
-    "declarativeContent",
-    "storage",
-    "webRequest",
-    "webRequestBlocking",
-    "<all_urls>"
-  ],
-  "background": {
-    "page": "background/index.html",
-    "persistent": true
-  },
-  "options_page": "options/index.html",
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-  "page_action": {
-    "default_title": "translator",
-    "default_icon": "images/logo.png",
-    "default_popup": "popup/index.html"
-  },
-  "devtools_page": "devtool/index.html",
+  "description": "一个小巧好用的翻译插件~",
   "icons": {
-    "16": "images/logo.png",
-    "32": "images/logo.png",
-    "48": "images/logo.png",
-    "128": "images/logo.png"
+    "16": "./public/logo.png",
+    "48": "./public/logo.png",
+    "128": "./public/logo.png"
   },
-  "manifest_version": 2,
+  "version": "0.0.1",
+  "browser_action": {
+    "default_icon": "./public/logo.png",
+    "default_popup": "./dist/popup/index.html"
+  },
+  "options_ui": {
+    "page": "./dist/options/index.html",
+    "open_in_tab": true,
+    "chrome_style": false
+  },
+  "background": {
+    "scripts": ["./dist/background/index.global.js"],
+    "persistent": false
+  },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["./dist/content/index.global.js"]
     }
-  ]
+  ],
+
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab",
+    "notifications",
+    "http://*/",
+    "https://*/"
+  ],
+  "content_security_policy": "script-src 'self' http://localhost:3303; object-src 'self'"
 }

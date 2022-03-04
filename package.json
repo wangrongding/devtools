@@ -4,9 +4,13 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vite build && vite build --config vite.config.custom.ts",
+    "build:dev": "npm-run-all build:*",
+    "build:pages": "vite build --emptyOutDir -w",
+    "build:scripts": "vite build --config vite.config.custom.ts --emptyOutDir -w",
     "preview": "vite preview",
-    "lint": "vue-tsc --noEmit"
+    "lint": "echo 'linting...' && vue-tsc --noEmit",
+    "clear": "rimraf dist"
   },
   "dependencies": {
     "vue": "^3.2.25"
@@ -14,6 +18,8 @@
   "devDependencies": {
     "@types/node": "^17.0.21",
     "@vitejs/plugin-vue": "^2.2.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
     "rollup-plugin-copy": "^3.4.0",
     "typescript": "^4.5.4",
     "vite": "^2.8.0",
