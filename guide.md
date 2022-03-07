@@ -36,6 +36,7 @@ Chrome 插件最重要也是必不可少的文件，用来配置所有和插件�
     "default_title": "Click Me",
     "default_popup": "popup.html"
   },
+  // zh_CN / en
   "default_locale": "en",
   //====================================
   // 会一直常驻的后台JS或后台页面
@@ -114,3 +115,17 @@ Chrome 插件最重要也是必不可少的文件，用来配置所有和插件�
   "devtools_page": "devtools.html"
 }
 ```
+
+## Manifest V3
+
+Manifest V3 现在可以在 Chrome 88 Beta 上进行试验，并在即将发布的版本中提供更多令人兴奋的功能。Chrome 网上应用店将于 1 月开始接受 Manifest V3 扩展
+
+Chrome 扩展的 Manifest V3，这是扩展平台的新版本，默认情况下使扩展更加安全、高性能和尊重隐私。
+
+## V2 的淘汰
+
+淘汰有两个关键日期：
+
+- 2022 年 1 月 17 日：Chrome 网上应用店将不再接受新的 Manifest V2 扩展。开发者仍可推送现有 Manifest V2 扩展的更新，但不得提交新的 Manifest V2 项目。
+
+- 2023 年 1 月：Chrome 浏览器将不再运行 Manifest V2 扩展程序。开发人员可能不再向现有 Manifest V2 扩展推送更新。
