@@ -1,4 +1,6 @@
-function test(gaga: string) {
-  console.log(gaga);
-}
-test("1aad3");
+let color = "#3aa757";
+
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.storage.sync.set({ color });
+  console.log("Default background color set to %cgreen", `color: ${color}`);
+});

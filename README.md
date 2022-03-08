@@ -3,3 +3,9 @@
 MIP （正在开发中...）
 
 - [x] vite 多入口打包
+- [ ] manifest.json
+- [ ] service_worker
+- [ ] content_script
+- [ ] popup
+- [ ] Option
+- [ ] DevTools

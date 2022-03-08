@@ -23,7 +23,7 @@ export default defineConfig({
       enforce: "post",
       apply: "build",
       transformIndexHtml(html) {
-        return html.replace(/"\/assets\//g, '"./assets/');
+        return html.replace(/"\/assets\//g, '"../assets/');
       },
     },
   ],
@@ -60,31 +60,4 @@ export default defineConfig({
       // },
     },
   },
-  // build: {
-  //   outDir: resPath("dist/pages"),
-  //   //关闭警告
-  //   emptyOutDir: false,
-  //   //自定义底层的 Rollup 打包配置
-  //   rollupOptions: [
-  //     {
-  //       input: {
-  //         //点击插件图标出现的弹窗
-  //         popup: resPath("src/views/popup/index.html"),
-  //         // 插件设置页面
-  //         options: resPath("src/views/options/index.html"),
-  //         // // 插件的核心 JS，一直活跃在后台，来监听所有请求
-  //         // background: resPath("src/views/scripts/background.ts"),
-  //       },
-  //     },
-  //     {
-  //       input: {
-  //         // 插件的核心 JS，一直活跃在后台，来监听所有请求
-  //         background: resPath("src/views/scripts/background.ts"),
-  //       },
-  //       output: {
-  //         entryFileNames: "[name].js",
-  //       },
-  //     },
-  //   ],
-  // },
 });
