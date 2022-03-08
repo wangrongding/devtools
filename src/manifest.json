@@ -4,9 +4,9 @@
   "version": "0.0.1",
   "manifest_version": 3,
   "author": "荣顶",
-  "background": {
-    "service_worker": "./dist/script/background.js"
-  },
+  // "background": {
+  //   "service_worker": "./script/background.js"
+  // },
   "permissions": [
     "activeTab",
     "contextMenus",
@@ -19,19 +19,19 @@
     "https://*/*"
   ],
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "./popup/index.html",
     "default_icon": {
-      "16": "/images/get_started16.png",
-      "32": "/images/get_started32.png",
-      "48": "/images/get_started48.png",
-      "128": "/images/get_started128.png"
+      "16": "/public/logo.png",
+      "32": "/public/logo.png",
+      "48": "/public/logo.png",
+      "128": "/public/logo.png"
     }
   },
   "icons": {
-    "16": "/images/get_started16.png",
-    "32": "/images/get_started32.png",
-    "48": "/images/get_started48.png",
-    "128": "/images/get_started128.png"
-  },
-  "options_page": "options.html"
+    "16": "/public/logo.png",
+    "32": "/public/logo.png",
+    "48": "/public/logo.png",
+    "128": "/public/logo.png"
+  }
+  // "options_page": "options.html"
 }

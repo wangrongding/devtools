@@ -33,7 +33,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: resPath("dist/pages"),
+    outDir: resPath("dist"),
     //关闭警告
     emptyOutDir: false,
     //自定义底层的 Rollup 打包配置
