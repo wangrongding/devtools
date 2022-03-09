@@ -1,15 +1,34 @@
+// 自动导入
+import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
 import copy from "rollup-plugin-copy";
 console.log(resolve(__dirname, "src/popup/index.html"));
-
 const resPath = (url: string) => resolve(__dirname, url);
 
 // https://vitejs.dev/config/
 export default defineConfig({
   root: resPath("src/views"),
   plugins: [
+    AutoImport({
+      include: [
+        /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+        /\.vue$/,
+        /\.vue\?vue/, // .vue
+        /\.md$/, // .md
+      ],
+      // global imports to register
+      imports: ["vue"],
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      dts: true, // enabled by default if `typescript` is installed
+      resolvers: [ElementPlusResolver()],
+    }),
     vue(),
     copy({
       targets: [
@@ -17,7 +36,7 @@ export default defineConfig({
         { src: "public/**/*", dest: "dist/public/" },
       ],
     }),
-    // rewrite assets to use relative path
+    // 重写assets以使用相对路径
     {
       name: "assets-rewrite",
       enforce: "post",
@@ -28,9 +47,9 @@ export default defineConfig({
     },
   ],
   resolve: {
-    alias: {
-      "@/": "src/",
-    },
+    //设置别名
+    alias: [{ find: "@", replacement: resPath("src") }],
+    extensions: [".ts", ".js"],
   },
   build: {
     outDir: resPath("dist"),
@@ -43,6 +62,8 @@ export default defineConfig({
         popup: resPath("src/views/popup/index.html"),
         // 插件设置页面
         options: resPath("src/views/options/index.html"),
+        // 插件的核心 JS，一直活跃在后台，来监听所有请求
+        background: resPath("src/views/scripts/background.ts"),
         // //chrome devtool pane 页面
         // devtoolPage: resolve(__dirname, "devtoolPage/index.html"),
         // // 插件的核心 JS，一直活跃在后台，来监听所有请求
