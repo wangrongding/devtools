@@ -6,6 +6,7 @@ MIP （正在开发中...）
 - [ ] manifest.json
 - [ ] service_worker
 - [ ] content_script
-- [ ] popup
+- [x] popup(点击图标的弹窗页面)
 - [ ] Option
 - [ ] DevTools
+- [x] 完成基本功能
