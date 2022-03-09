@@ -43,11 +43,8 @@ request.interceptors.request.use(
 async function successCallback(res: any) {
   const { data } = res;
   if (data.errorCode === "0") {
-    return Promise.resolve(data.data);
+    return Promise.resolve(data);
   } else {
-    if (Object.prototype.toString.apply(data) === "[object Blob]") {
-      return Promise.resolve(data);
-    }
     ElMessage({
       message: data.msg,
       grouping: true,
@@ -59,21 +56,11 @@ async function successCallback(res: any) {
 
 // 请求错误回调
 function errorCallback(error: any) {
-  console.error(error, "🚗🚗🚗");
-  if (error.response.status == 401) {
-    sessionStorage.clear();
-    ElMessage({
-      type: "warning",
-      message: "请重新登录！",
-    });
-    window.history.pushState({}, "/student", "/student");
-  } else {
-    ElMessage({
-      message: error,
-      grouping: true,
-      type: "error",
-    });
-  }
+  ElMessage({
+    message: error,
+    grouping: true,
+    type: "error",
+  });
   return Promise.reject(error);
 }
 // respone返回拦截器

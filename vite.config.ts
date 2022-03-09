@@ -49,7 +49,7 @@ export default defineConfig({
   resolve: {
     //设置别名
     alias: [{ find: "@", replacement: resPath("src") }],
-    extensions: [".ts", ".js"],
+    extensions: [".ts", ".js", ".vue"],
   },
   build: {
     outDir: resPath("dist"),
