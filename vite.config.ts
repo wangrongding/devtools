@@ -2,6 +2,16 @@
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+// 对打包后的文件开启web服务
+import serve from "rollup-plugin-serve";
+// 监听打包后的文件目录,并热更新
+import livereload from "rollup-plugin-livereload";
+// 打包可视化
+import { visualizer } from "rollup-plugin-visualizer";
+
+const util = require("util");
+// import { spawnSync } from "child_process";
+const spawnSync = util.promisify(require("child_process").spawn);
 
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
@@ -30,12 +40,18 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
     vue(),
-    copy({
-      targets: [
-        { src: ["src/manifest.json"], dest: "dist/" },
-        { src: "public/**/*", dest: "dist/public/" },
-      ],
-    }),
+    {
+      name: "custom-built-script",
+      apply: "build",
+      buildEnd: () => {
+        spawnSync(
+          "npx tsup src/views/scripts/background.ts --format iife --out-dir dist/scripts",
+          {
+            shell: true,
+          }
+        );
+      },
+    },
     // 重写assets以使用相对路径
     {
       name: "assets-rewrite",
@@ -57,6 +73,24 @@ export default defineConfig({
     emptyOutDir: false,
     //自定义底层的 Rollup 打包配置
     rollupOptions: {
+      plugins: [
+        livereload({ delay: 3000, watch: "dist" }),
+        serve({
+          host: "localhost",
+          port: 9521,
+          contentBase: "dist",
+          openPage: "/popup/index.html",
+          open: true,
+        }),
+        copy({
+          targets: [
+            { src: ["src/manifest.json"], dest: "dist/" },
+            { src: "public/**/*", dest: "dist/public/" },
+          ],
+        }),
+
+        // visualizer({ open: true, template: "network" }),
+      ],
       input: {
         //点击插件图标出现的弹窗
         popup: resPath("src/views/popup/index.html"),

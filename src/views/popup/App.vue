@@ -48,7 +48,7 @@ function query() {
     to: "Auto",
   }).then((res): any => {
     console.log("🚀🚀🚀 / res", res);
-    state.formParams.data.content = res.translation[0];
+    state.formParams.data.content = (res as any).translation[0];
     // ElMessage({
     //   type: "success",
     //   message: "Translation Successful",
