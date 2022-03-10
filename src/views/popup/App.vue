@@ -26,9 +26,12 @@ const state = reactive({
         placeholder: "翻译的结果",
       },
     },
-    rules: {},
-    // labelWidth: "0px",
-    // inline: true,
+    rules: {
+      text: [
+        { required: true, message: "请输入要翻译的内容", trigger: "blur" },
+      ],
+    },
+    labelWidth: "60px",
     submit: {
       submitText: "查询",
       submitFunction: query,
@@ -74,5 +77,6 @@ function query() {
   margin: auto;
   padding: 20px;
   border-radius: 30px;
+  border: 1px dashed green;
 }
 </style>
