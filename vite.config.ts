@@ -62,6 +62,22 @@ export default defineConfig({
       },
     },
   ],
+  css: {
+    postcss: {
+      plugins: [
+        {
+          postcssPlugin: "internal:charset-removal",
+          AtRule: {
+            charset: (atRule) => {
+              if (atRule.name === "charset") {
+                atRule.remove();
+              }
+            },
+          },
+        },
+      ],
+    },
+  },
   resolve: {
     //设置别名
     alias: [{ find: "@", replacement: resPath("src") }],
@@ -74,13 +90,13 @@ export default defineConfig({
     //自定义底层的 Rollup 打包配置
     rollupOptions: {
       plugins: [
-        livereload({ delay: 3000, watch: "dist" }),
+        livereload({ delay: 100000, watch: "dist" }),
         serve({
           host: "localhost",
           port: 9521,
           contentBase: "dist",
           openPage: "/popup/index.html",
-          open: true,
+          // open: true,
         }),
         copy({
           targets: [
