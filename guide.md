@@ -150,3 +150,12 @@ tsup
 ```sh
 "tsup src/background src/content --format iife --out-dir extension/dist --no-splitting",
 ```
+
+## 自动引入
+
+一开始是用了
+unplugin-auto-import/vite 和
+unplugin-vue-components/vite
+虽然写起来很方便,但在这个场景中,不太适用,因为自动加载后每一次 build 都会很耗时间
+
+自己取舍

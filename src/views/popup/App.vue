@@ -2,7 +2,9 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 import Form from "@/components/element/Form.vue";
+import { browser } from "webextension-polyfill-ts";
 import { translate } from "@/api/index";
+import { reactive } from "vue";
 const state = reactive({
   show: false,
   //表单参数
@@ -40,6 +42,7 @@ const state = reactive({
   },
 });
 
+//查询
 function query() {
   state.show = !state.show;
   translate({
@@ -49,19 +52,22 @@ function query() {
   }).then((res): any => {
     console.log("🚀🚀🚀 / res", res);
     state.formParams.data.content = (res as any).translation[0];
-    // ElMessage({
-    //   type: "success",
-    //   message: "Translation Successful",
-    // });
   });
+}
+
+function openOptionsPage() {
+  browser.runtime.openOptionsPage();
 }
 </script>
 
 <template>
   <div class="main">
     <img alt="Vue logo" style="width: 30px" src="../../assets/logo.png" />
+    <Form :formParams="state.formParams"></Form>
     <div>
-      <Form :formParams="state.formParams"></Form>
+      <el-button type="text" size="default" @click="openOptionsPage">
+        openOptionsPage
+      </el-button>
     </div>
   </div>
 </template>

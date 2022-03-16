@@ -1,6 +1,7 @@
-let color = "#3aa757";
+// import { browser } from "webextension-polyfill-ts";
+// let color = "#3aa757";
 
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.sync.set({ color });
-  console.log("Default background color set to %cgreen", `color: ${color}`);
-});
+// browser.runtime.onInstalled.addListener((): void => {
+//   // eslint-disable-next-line no-console
+//   console.log("Extension installed");
+// });

@@ -1,12 +1,17 @@
 # Vue 3 + Typescript + Vite 实现的 Chrome 扩展
 
-MIP （正在开发中...）
+MIP （该项目可用，且正在持续完善中...）
 
-- [x] vite 多入口打包
-- [ ] manifest.json
-- [ ] service_worker
-- [ ] content_script
-- [x] popup(点击图标的弹窗页面)
-- [ ] Option
-- [ ] DevTools
-- [x] 完成基本功能
+---
+
+- [x] 插件技术架构
+  - [x] vite 多入口打包
+  - [x] manifest.json
+  - [x] content_script
+  - [x] popup(点击图标的弹窗页面)
+  - [ ] service_worker(暂时用不到)
+  - [ ] Option(暂时用不到)
+  - [ ] DevTools(暂时用不到)
+- [x] 插件功能列表
+  - [x] 快捷翻译组件
+  - [x] 页面翻译优化(使用谷歌翻译网页时,过滤代码块)

@@ -1,7 +1,3 @@
-// 自动导入
-import AutoImport from "unplugin-auto-import/vite";
-import Components from "unplugin-vue-components/vite";
-import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 // 对打包后的文件开启web服务
 import serve from "rollup-plugin-serve";
 // 监听打包后的文件目录,并热更新
@@ -24,28 +20,13 @@ const resPath = (url: string) => resolve(__dirname, url);
 export default defineConfig({
   root: resPath("src/views"),
   plugins: [
-    AutoImport({
-      include: [
-        /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
-        /\.vue$/,
-        /\.vue\?vue/, // .vue
-        /\.md$/, // .md
-      ],
-      // global imports to register
-      imports: ["vue"],
-      resolvers: [ElementPlusResolver()],
-    }),
-    Components({
-      dts: true, // enabled by default if `typescript` is installed
-      resolvers: [ElementPlusResolver()],
-    }),
     vue(),
     {
       name: "custom-built-script",
       apply: "build",
       buildEnd: () => {
         spawnSync(
-          "npx tsup src/views/scripts/background.ts --format iife --out-dir dist/scripts",
+          "npx tsup src/views/scripts/background.ts src/views/scripts/content.ts --format iife --out-dir dist/scripts",
           {
             shell: true,
           }
@@ -87,16 +68,17 @@ export default defineConfig({
     outDir: resPath("dist"),
     //关闭警告
     emptyOutDir: false,
+    chunkSizeWarningLimit: 1024,
     //自定义底层的 Rollup 打包配置
     rollupOptions: {
       plugins: [
-        livereload({ delay: 100000, watch: "dist" }),
+        // livereload({ delay: 100000, watch: "dist" }),
         serve({
           host: "localhost",
           port: 9521,
           contentBase: "dist",
           openPage: "/popup/index.html",
-          // open: true,
+          open: true,
         }),
         copy({
           targets: [
@@ -114,14 +96,14 @@ export default defineConfig({
         options: resPath("src/views/options/index.html"),
         // 插件的核心 JS，一直活跃在后台，来监听所有请求
         background: resPath("src/views/scripts/background.ts"),
+        // 与页面同级，并在某个时机执行，可以拿到页面的 document
+        content: resPath("src/views/scripts/content.ts"),
         // //chrome devtool pane 页面
         // devtoolPage: resolve(__dirname, "devtoolPage/index.html"),
         // // 插件的核心 JS，一直活跃在后台，来监听所有请求
         // background: resPath("src/views/scripts/background.ts"),
         // // 加载 chrome devtool pane 的入口
         // devtool: resolve(__dirname, "devtool/index.html"),
-        // 与页面同级，并在某个时机执行，可以拿到页面的 document
-        // content: resolve(__dirname, "src/content.ts"),
       },
       // output: {
       //   // entryFileNames: "[name].js",
