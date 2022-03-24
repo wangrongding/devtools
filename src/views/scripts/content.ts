@@ -17,6 +17,7 @@ function setNotranslateElement() {
   if (window.location.hostname.indexOf("github") !== -1) {
     // 以下为github中不需要翻译的元素,可根据需求自定义配置
     const githubSelector = [
+      ".SelectMenu-list",
       ".bg-gray-light.pt-3.hide-full-screen.mb-5",
       "summary.btn.css-truncate",
       ".commit-author",
