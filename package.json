@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "vite",
     "dev:all": "npm-run-all dev:pages dev:scripts",
-    "dev:pages": "vite build --emptyOutDir -w",
+    "dev:pages": "vite build --emptyOutDir -w --mode watch",
     "dev:scripts": "vite build --config vite.config.custom.ts --emptyOutDir -w",
-    "build": "vite build && vite build --config vite.config.custom.ts",
+    "build": "vite build",
     "preview": "vite preview",
     "lint": "echo 'linting...' && vue-tsc --noEmit",
     "clear": "rimraf dist"

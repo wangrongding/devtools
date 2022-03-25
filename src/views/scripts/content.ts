@@ -1,12 +1,11 @@
-window.onload = function () {
-  console.log("d-tools 已加载~ 😀😀😀onload");
+window.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM fully loaded and parsed");
+  setNotranslateElement();
+});
+window.onload = () => {
+  console.log("d-tools 已加载~ 😀onload");
   setNotranslateElement();
 };
-
-window.addEventListener("DOMContentLoaded", () => {
-  console.log("d-tools 已加载~ 😀😀😀DOMContentLoaded");
-});
-
 // document.body.style.backgroundColor = "green";
 
 // 设置不自动翻译的元素
@@ -17,6 +16,9 @@ function setNotranslateElement() {
   if (window.location.hostname.indexOf("github") !== -1) {
     // 以下为github中不需要翻译的元素,可根据需求自定义配置
     const githubSelector = [
+      // 仓库头部导航
+      ".hide-full-screen",
+      // stars 自定义列表
       ".SelectMenu-list",
       ".bg-gray-light.pt-3.hide-full-screen.mb-5",
       "summary.btn.css-truncate",
