@@ -1,4 +1,8 @@
-# Vue 3 + Typescript + Vite 实现的 Chrome 扩展
+![](https://raw.githubusercontent.com/wangrongding/image-house/master/images202203251514282.gif)  
+
+# DevTools  
+
+一个基于Vue 3 + Typescript + Vite 实现的 开发者工具Chrome 扩展
 
 MIP （该项目可用，且正在持续完善中...）
 
