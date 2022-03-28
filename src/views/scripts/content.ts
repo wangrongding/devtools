@@ -58,11 +58,5 @@ function setNotranslateElement() {
       });
     });
   }
-
   addNoTranslateAttr(passTransList);
-  // window.onload = () => {
-  //   setTimeout(function () {
-  //     console.log("🚀🚀🚀 / passTransList", passTransList);
-  //   }, 1500);
-  // };
 }
